@@ -1,0 +1,22 @@
+import plotly.graph_objects as go
+from plotly.offline import plot
+students_data={
+    'Name':['Ashwini','vaishnavi','punyashree','geethanjali'],
+    'Height':[160,155,170,165],
+    'Weight':[45,40,35,55],
+    'Age':[18,20,19,21]
+    }
+hover_text=[f' Name:{name}<br>Height:{height}<br>Weight:{weight}<br>Age:{age}'
+            for name,height,weight,age in zip(students_data['Name'],students_data['Height'],students_data['Weight'],students_data['Age'])]
+fig=go.Figure(data=[go.Scatter3d(
+    x=students_data['Height'],
+                                y=students_data['Weight'],
+                                z=students_data['Age'],
+                                       mode='markers',
+                                       marker=dict(
+                                           size=10,
+                                           color='gold',
+                                           opacity=0.8),
+                                       text=hover_text)])
+fig.update_layout(scene=dict(xaxis_title='height',yaxis_title='weight',zaxis_title='age'),title='3D scatter plot of student data')
+plot(fig,filename='student_plot.html')
